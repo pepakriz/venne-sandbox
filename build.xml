@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="venne/sandbox" default="build">
+
+	<property name="path.phing" value="${path.root}/phing"/>
+	<property name="path.bin" value="${path.root}/vendor/bin"/>
+	<property name="path.build" value="${path.root}/build"/>
+	<property name="path.composer.executable" value="composer"/>
+	<property name="path.venne.executable" value="${path.bin}/venne"/>
+	<property name="path.php.executable" value="php"/>
+	<property name="path.phpcs.executable" value="${path.bin}/phpcs"/>
+	<property name="path.tester.executable" value="${path.bin}/tester"/>
+	<property name="path.phpcs.ruleset" value="${path.build}/ruleset.xml"/>
+	<property name="path.root" value="${project.basedir}"/>
+	<property name="path.src" value="${path.root}/src"/>
+	<property name="path.vendor" value="${path.root}/vendor"/>
+	<property name="path.tests" value="${path.root}/tests"/>
+
+	<includepath classpath="${path.phing}" />
+	<taskdef name="recursive" classname="RecursiveTask" />
+
+
+	<target name="build">
+		<recursive>
+			<fileset dir="${path.vendor}">
+			</fileset>
+		</recursive>
+	</target>
+
+	<target name="rebuild">
+		<recursive>
+			<fileset dir="${path.vendor}">
+			</fileset>
+		</recursive>
+	</target>
+
+	<target name="check" depends="check-php,tester">
+		<recursive>
+			<fileset dir="${path.vendor}">
+			</fileset>
+		</recursive>
+	</target>
+
+	<target name="check-php" depends="phpcs">
+		<recursive>
+			<fileset dir="${path.vendor}">
+			</fileset>
+		</recursive>
+	</target>
+
+	<target name="phpcs">
+		<recursive>
+			<fileset dir="${path.vendor}">
+			</fileset>
+		</recursive>
+	</target>
+
+	<target name="tester">
+		<recursive>
+			<fileset dir="${path.vendor}">
+			</fileset>
+		</recursive>
+		<exec
+				executable="${path.tester.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg path="${path.tests}"/>
+		</exec>
+	</target>
+
+	<target name="update-db">
+		<exec
+				executable="${path.venne.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+				>
+			<arg value="orm:schema-tool:update"/>
+			<arg value="--dump-sql"/>
+		</exec>
+
+		<if>
+			<equals arg1="true" arg2="true" />
+			<then>
+				<input propertyname="test" defaultValue="yes" validargs="yes,no">Update database schema?</input>
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${test}" arg2="yes" />
+			<then>
+				<exec
+						executable="${path.venne.executable}"
+						logoutput="true"
+						passthru="true"
+						checkreturn="true"
+						>
+					<arg value="orm:schema-tool:update"/>
+					<arg value="--force"/>
+				</exec>
+			</then>
+		</if>
+	</target>
+
+</project>

@@ -1,0 +1,43 @@
+{
+	"name": "venne/sandbox",
+	"description": "The sandbox for Venne projects",
+	"keywords": ["nette", "venne", "sandbox"],
+	"homepage": "http://venne.cz",
+	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"authors": [
+		{
+			"name": "Josef Kříž",
+			"homepage": "http://www.josef-kriz.cz"
+		}
+	],
+	"require": {
+		"php": ">= 5.5.0",
+
+		"kdyby/doctrine": "@dev",
+		"kdyby/doctrine-forms": "@dev",
+		"kdyby/validator": "@dev",
+		"kdyby/forms-replicator": "@dev",
+
+		"o5/grido": "dev-master as 2.0.0",
+
+		"venne/packages": "@dev",
+		"venne/assets": "@dev",
+		"venne/forms": "@dev",
+		"venne/widgets": "@dev",
+		"venne/data-transfer": "@dev",
+		"venne/venne": "@dev"
+	},
+	"require-dev": {
+		"nette/tester": "~1.0",
+		"phing/phing": "~2.8.0",
+		"squizlabs/php_codesniffer": "~1.5.0"
+	},
+	"scripts": {
+		"post-install-cmd": [
+			"vendor/bin/package-manager sync --composer"
+		],
+		"post-update-cmd": [
+			"vendor/bin/package-manager sync --composer"
+		]
+	}
+}

@@ -1,0 +1,16 @@
+parameters:
+
+php:
+	date.timezone: Europe/Prague
+
+nette:
+	session:
+		expiration: 14 days
+		autoStart: true
+
+
+dataTransfer:
+	driver: Venne\Bridges\Kdyby\Doctrine\DataTransfer\EntityDriver
+
+doctrine:
+	defaultRepositoryClassName: Kdyby\Doctrine\EntityRepository

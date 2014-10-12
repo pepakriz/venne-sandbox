@@ -1,0 +1,6 @@
+parameters:
+
+doctrine:
+	user: ''
+	password: ''
+	dbname: ''

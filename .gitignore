@@ -1,0 +1,12 @@
+log/*
+temp/*
+vendor/*
+.venne.packages
+www/resources
+
+.DS_Store
+!.gitignore
+!.htaccess
+!web.config
+composer.lock
+app/config/config.local.neon
